@@ -1,0 +1,42 @@
+{
+  "name": "@cib/prisma",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "db-deploy": "yarn prisma migrate deploy",
+    "db-migrate": "yarn prisma migrate dev",
+    "db-nuke": "docker compose down --volumes --remove-orphans || docker-compose down --volumes --remove-orphans",
+    "db-reset": "run-s db-nuke db-setup",
+    "db-seed": "yarn prisma db seed",
+    "db-setup": "run-s db-up db-deploy db-seed",
+    "db-studio": "yarn prisma studio",
+    "db-up": "docker compose up -d || docker-compose up -d",
+    "db-generate": "prisma generate",
+    "db-push": "prisma db push --skip-generate",
+    "dx": "yarn db-setup",
+    "generate-schemas": "prisma generate && prisma format",
+    "post-install": "yarn generate-schemas"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "9.2.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.12.0",
+    "@prisma/generator-helper": "^6.12.0",
+    "prisma": "^6.12.0",
+    "ts-node": "^10.9.1",
+    "zod": "^4.0.5"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "client",
+    "zod",
+    "zod-utils.ts"
+  ],
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  }
+}

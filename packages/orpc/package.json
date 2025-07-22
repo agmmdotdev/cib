@@ -1,0 +1,20 @@
+{
+  "name": "@cib/orpc",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./contract": "./contract/index.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@orpc/client": "^1.7.4",
+    "@orpc/contract": "^1.7.4",
+    "@orpc/server": "^1.7.4",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@cib/typescript-config": "*"
+  }
+}
