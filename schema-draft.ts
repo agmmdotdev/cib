@@ -164,3 +164,36 @@ class Role extends VendureEntity implements ChannelAware {
     @JoinTable()
     channels: Channel[];
 }
+
+class Promotion extends AdjustmentSource implements ChannelAware, SoftDeletable, HasCustomFields, Translatable {
+    type = AdjustmentType.PROMOTION;
+    constructor(input?: DeepPartial<Promotion> & {
+            promotionConditions?: Array<PromotionCondition<any>>;
+            promotionActions?: Array<PromotionAction<any>>;
+        })
+    @Column({ type: Date, nullable: true })
+    deletedAt: Date | null;
+    @Column({ type: Date, nullable: true })
+    startsAt: Date | null;
+    @Column({ type: Date, nullable: true })
+    endsAt: Date | null;
+    @Column({ nullable: true })
+    couponCode: string;
+    @Column({ nullable: true })
+    perCustomerUsageLimit: number;
+    @Column({ nullable: true })
+    usageLimit: number;
+    name: LocaleString;
+    description: LocaleString;
+    @Column() enabled: boolean;
+    @ManyToMany(type => Channel, channel => channel.promotions)
+    @JoinTable()
+    channels: Channel[];
+    @ManyToMany(type => Order, order => order.promotions)
+    orders: Order[];
+    @Column(type => CustomPromotionFields)
+    customFields: CustomPromotionFields;
+    @Column('simple-json') conditions: ConfigurableOperation[];
+    @Column('simple-json') actions: ConfigurableOperation[];
+    @Column() priorityScore: number;
+}
