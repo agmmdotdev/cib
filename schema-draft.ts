@@ -97,9 +97,6 @@ class Product extends VendureEntity implements  HasCustomFields,  SoftDeletable 
     variants: ProductVariant[];
     @OneToMany(type => ProductOptionGroup, optionGroup => optionGroup.product)
     optionGroups: ProductOptionGroup[];
-    @ManyToMany(type => FacetValue, facetValue => facetValue.products)
-    @JoinTable()
-    facetValues: FacetValue[];
     @Column(type => CustomProductFields)
     customFields: CustomProductFields;
 }
