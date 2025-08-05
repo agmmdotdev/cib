@@ -6,12 +6,26 @@
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "test",
+        "class_name": "MyDurableObject"
+      }
+    ]
+  },
   "d1_databases": [
     {
       "binding": "cib-dev",
       "database_name": "cib-dev",
       "database_id": "0a03a3fd-a22d-4d52-abb4-41843fb47df8",
       "migrations_dir": "drizzle/migrations"
+    }
+  ],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["MyDurableObject"]
     }
   ]
 }
