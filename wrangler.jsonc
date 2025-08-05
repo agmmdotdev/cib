@@ -6,6 +6,12 @@
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
   },
+  "workflows": [{
+    "name": "my-workflow",
+    "binding": "MY_WORKFLOW",
+    "class_name": "MyWorkflow"
+  }],
+  
   "durable_objects": {
     "bindings": [
       {

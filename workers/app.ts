@@ -1,4 +1,6 @@
 import { createRequestHandler } from "react-router";
+// Re-export the Workflow class so that Wrangler can detect it and include it in the Worker bundle
+export { MyWorkflow } from "~/workflow/test";
 import { db } from "~/db";
 
 declare module "react-router" {

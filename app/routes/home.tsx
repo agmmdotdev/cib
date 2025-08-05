@@ -8,7 +8,12 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export function loader({ context }: Route.LoaderArgs) {
+export async function loader({ context }: Route.LoaderArgs) {
+  const workflow = await context.cloudflare.env.MY_WORKFLOW.create({
+    id: "test",
+    params: { amm: "amm" },
+  });
+  console.log("workflow.id", workflow.id);
   return { message: context.cloudflare.env.VALUE_FROM_CLOUDFLARE };
 }
 

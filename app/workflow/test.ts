@@ -3,14 +3,17 @@ import {
   type WorkflowEvent,
   type WorkflowStep,
 } from "cloudflare:workers";
-export class MyWorkflow extends WorkflowEntrypoint<Env, Params> {
-  async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
+export class MyWorkflow extends WorkflowEntrypoint<Env, { amm: string }> {
+  async run(event: WorkflowEvent<{ amm: string }>, step: WorkflowStep) {
+    console.log("run");
     // Steps here
-    let someComputedState = step.do("step1", async () => {
+    let someComputedState = await step.do("step1", async () => {
+      console.log("step1");
       return "step1";
     });
-
-    // Optional: return state from our run() method
-    return someComputedState;
+    let someComputedState2 = await step.do("step2", async () => {
+      console.log("step2");
+      return "step2";
+    });
   }
 }
